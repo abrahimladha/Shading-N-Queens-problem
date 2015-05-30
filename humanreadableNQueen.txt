@@ -1,0 +1,95 @@
+n = 6
+q = 0
+row = 1
+
+board = Array[0&, {n,n}]
+
+addQueen[x_,y_] :=
+If[board[[x,y]] == 0,
+	For[i = 1,i <= n, i++
+		board[[x,i]]++;
+		board[[i,y]]++;];
+	addDiag1[x,y];
+	addDiag2[x,y];
+	board[[x,y]] = 5;
+	q++;]
+
+removeQueen[x_,y_] :=
+If[board[[x,y]] == 0,
+	For[i = 1,i <= n, i++
+		board[[x,i]]--;
+		board[[i,y]]--;];
+	addDiag1[x,y];
+	addDiag2[x,y];
+	board[[x,y]] = 0;
+	q--;]
+
+addQueen[x_,y_] :=
+If[board[[x,y]] == 0,
+	For[i = 1,i <= n, i++
+		board[[x,i]]++;
+		board[[i,y]]++;];
+	addDiag1[x,y];
+	addDiag2[x,y];
+	board[[x,y]] = 5;
+	q++;]
+
+addDiag1[x0_,y0_] :=
+	Module[{x = x0, y = y0},
+	While[x != 1 && y != 1,
+	x--;
+	y--];
+	While[x != n + 1 && y != n + 1,
+	board[[x,y]]++;
+	x++;
+	y++;]]
+
+addDiag2[x0_,y0_] :=
+	Module[{x = x0, y = y0},
+	While[x != 1 && y != 1,
+	x--;
+	y++];
+	While[x != n + 1 && y != n + 1,
+	board[[x,y]]++;
+	x++;
+	y--;]]
+
+removeDiag1[x0_,y0_] :=
+	Module[{x = x0, y = y0},
+	While[x != 1 && y != 1,
+	x--;
+	y--];
+	While[x != n + 1 && y != n + 1,
+	board[[x,y]]--;
+	x++;
+	y++;]]
+
+removeDiag2[x0_,y0_] :=
+	Module[{x = x0, y = y0},
+	While[x != 1 && y != 1,
+	x--;
+	y++];
+	While[x != n + 1 && y != n + 1,
+	board[[x,y]]--;
+	x++;
+	y--;]]
+
+solveNQ[row_] :=
+If[q == n, Return True]
+If[q < n,
+	For[i = 1, i <= n, i++,
+	If[board[[row,i]] == 0,
+		addQueen[row,i];
+		If[solveNQ[row + 1] == True,
+			Return True,
+			removeQueen[row,i]
+			]]],Return False]
+
+
+brownsBySix :=
+If[Mod[n,6] == 0,
+	for[u = 1, u <= n / 3, u++,
+	addQueen[u,3u];
+	addQueen[u + n / 3, 3u - 1];
+	addQueen[u + 2n / 3, 3u - 2]
+	]]
