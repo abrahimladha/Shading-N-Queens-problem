@@ -1,6 +1,8 @@
 # Shading-N-Queens-problem
 
-Simple mathematica code to generate a shaded N-Queens board, you can use it to write general solutions, and one is provided. To view the board, simple us arrayplot on the board. This was written for Dr. Brown as part Here are a few examples.
+Simple mathematica code to generate a shaded N-Queens board, you can use it to write general solutions, and one is provided. To view the board, simple us arrayplot on the board. This was written for Dr. Brown as part of STEP. 
+
+Here are a few examples.
 
 
 
